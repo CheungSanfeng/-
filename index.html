@@ -1,0 +1,738 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>劳动课程标准 - 可视化展示</title>
+    <!-- TailwindCSS 3.0+ 通过CDN引入 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // 配置Tailwind主题
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/css">
+        /* 自定义样式 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 内容淡入动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        /* 不同延迟的淡入效果 */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        
+        /* 卡片悬停效果 */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* 按钮悬停效果 */
+        .btn-hover {
+            transition: all 0.2s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        /* 深色模式文本颜色 */
+        .dark .dark-text-white {
+            color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-book-open text-primary-600 dark:text-primary-400 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">劳动课程标准</span>
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <!-- 深色模式切换按钮 -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden text-gray-600 dark:text-gray-300"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun hidden text-yellow-500"></i>
+                    </button>
+                    <!-- 导航链接 -->
+                    <div class="hidden md:flex space-x-4 ml-4">
+                        <a href="#overview" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">概述</a>
+                        <a href="#objectives" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课程目标</a>
+                        <a href="#content" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课程内容</a>
+                        <a href="#stage-objectives" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">学段目标</a>
+                        <a href="#schedule" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课时安排</a>
+                        <a href="#implementation" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">实施建议</a>
+                        <a href="#evaluation" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">评价方式</a>
+                        <a href="#resources" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课程资源</a>
+                    </div>
+                </div>
+                <!-- 移动端菜单按钮 -->
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">概述</a>
+                <a href="#objectives" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课程目标</a>
+                <a href="#content" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课程内容</a>
+                <a href="#stage-objectives" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">学段目标</a>
+                <a href="#schedule" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课时安排</a>
+                <a href="#implementation" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">实施建议</a>
+                <a href="#evaluation" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">评价方式</a>
+                <a href="#resources" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">课程资源</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-800 dark:to-primary-900">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl fade-in">劳动课程标准</h1>
+            <p class="mt-6 max-w-2xl mx-auto text-xl text-primary-100 fade-in delay-1">让学生劳动意识与能力，促进德智体美劳全面提升</p>
+            <div class="mt-8 flex justify-center fade-in delay-2">
+                <a href="#overview" class="btn-hover inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 shadow-lg">
+                    开始阅读 <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 概述部分 -->
+        <section id="overview" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">课程概述</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <p class="mb-4">劳动教育是中国特色社会主义教育制度的重要内容，是学校实施素质教育的重要组成部分。劳动课程旨在让学生正确的劳动价值观和良好的劳动习惯，提高学生的劳动能力，促进学生德智体美劳全面提升。</p>
+                <p class="mb-4">本课程标准根据党的教育方针和国家课程改革要求制定，适用于义务教育阶段的劳动教育。课程强调理论与实践相结合，注重培养学生的劳动意识、劳动习惯和劳动技能。</p>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                            <h3 class="text-lg font-semibold">价值导向</h3>
+                        </div>
+                        <p>让学生热爱劳动、尊重劳动的价值观念，理解劳动创造美好生活的道理。</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-hands text-green-500 mr-2"></i>
+                            <h3 class="text-lg font-semibold">实践体验</h3>
+                        </div>
+                        <p>通过丰富多样的劳动实践活动，让学生亲身体验劳动过程，培养动手能力。</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-users text-blue-500 mr-2"></i>
+                            <h3 class="text-lg font-semibold">社会参与</h3>
+                        </div>
+                        <p>让学生参与家庭、学校和社会劳动，培养责任感和社会参与意识。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 课程目标部分 -->
+        <section id="objectives" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">课程目标</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <p class="mb-4">劳动课程的总体目标是让学生正确的劳动价值观和良好的劳动习惯，掌握基本的劳动技能，形成初步的劳动能力，促进学生全面发展。具体目标包括：</p>
+                
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-heart text-red-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">情感态度与价值观</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>树立正确的劳动观念，形成热爱劳动、尊重劳动的良好品质</li>
+                            <li>养成良好的劳动习惯和积极的劳动态度</li>
+                            <li>理解劳动创造美好生活的道理，体验劳动的价值和意义</li>
+                            <li>建立初步的生涯规划意识，形成对职业的正确认识</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-brain text-purple-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">知识与技能</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>了解与日常生活相关的劳动知识，掌握基本的劳动技能</li>
+                            <li>学习使用常见的劳动工具和设备，了解相关安全知识</li>
+                            <li>掌握基本的家务劳动、生活自理、校园劳动等技能</li>
+                            <li>了解传统劳动技艺和现代科技与劳动的关系</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-cogs text-orange-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">过程与方法</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>学会劳动过程的规划与实施，培养解决问题的能力</li>
+                            <li>学习团队协作，培养集体劳动意识和合作精神</li>
+                            <li>学会观察、分析和评价劳动过程与结果</li>
+                            <li>培养创新意识，学会改进劳动方法和提高劳动效率</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-seedling text-green-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">社会责任与实践</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>培养社会责任感，积极参与家庭、学校和社区劳动</li>
+                            <li>了解劳动与社会发展的关系，认识劳动的社会价值</li>
+                            <li>关注环境保护和资源节约，培养可持续发展意识</li>
+                            <li>体验不同职业的劳动过程，为未来职业选择奠定基础</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 课程内容部分 -->
+        <section id="content" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">课程内容</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <p class="mb-6">劳动课程内容涵盖日常生活劳动、生产劳动服务和性劳动三种劳动，注重与学生生活实际和社会实践相结合。</p>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100 dark:bg-gray-700">
+                            <tr>
+                                <th class="py-3 px-4 text-left font-semibold">劳动领域</th>
+                                <th class="py-3 px-4 text-left font-semibold">主要内容</th>
+                                <th class="py-3 px-4 text-left font-semibold">活动示例</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <tr>
+                                <td class="py-4 px-4 font-medium">日常生活劳动</td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>个人生活自理</li>
+                                        <li>家庭日常劳动</li>
+                                        <li>学校日常劳动</li>
+                                        <li>社区环境维护</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>整理书包、收拾房间</li>
+                                        <li>洗衣服、做饭、打扫卫生</li>
+                                        <li>教室值日、校园清洁</li>
+                                        <li>社区志愿服务</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-medium">生产劳动</td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>农业生产劳动</li>
+                                        <li>工业生产劳动</li>
+                                        <li>服务业劳动</li>
+                                        <li>职业体验</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>种植蔬菜、果树</li>
+                                        <li>手工制作、简单维修</li>
+                                        <li>商业服务体验</li>
+                                        <li>职业岗位体验</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-medium">创造性劳动</td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>创意设计</li>
+                                        <li>技术创新</li>
+                                        <li>艺术创作</li>
+                                        <li>科技发明</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>创意手工制作</li>
+                                        <li>小发明小创造</li>
+                                        <li>艺术作品创作</li>
+                                        <li>科技创新实践</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>整理内务、个人卫生</li>
+                                        <li>烹饪、家居清洁、家电使用</li>
+                                        <li>教室清洁、校园环境维护</li>
+                                        <li>社区清洁、垃圾分类</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-medium">生产劳动</td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>农业生产劳动</li>
+                                        <li>工业生产劳动</li>
+                                        <li>传统工艺劳动</li>
+                                        <li>科技创新劳动</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>种植、养殖、农作物管理</li>
+                                        <li>简单手工制作、工具使用</li>
+                                        <li>传统手工艺品制作</li>
+                                        <li>创客活动、科技小制作</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-medium">服务性劳动</td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>校内服务劳动</li>
+                                        <li>家庭服务劳动</li>
+                                        <li>社会公益劳动</li>
+                                        <li>职业体验劳动</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>图书管理、值日服务</li>
+                                        <li>照顾家人、家庭事务管理</li>
+                                        <li>志愿服务、公益活动</li>
+                                        <li>职业体验、工作岗位见习</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学段目标部分 -->
+        <section id="stage-objectives" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">学段目标</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <p class="mb-6">劳动课程按照小学低年级（1-2年级）、小学中年级（3-4年级）、小学高年级（5-6年级）和初中阶段（7-9年级）四个学段设置目标，循序渐进地培养学生的劳动素养。</p>
+                
+                <div class="space-y-6">
+                    <!-- 学段标签页 -->
+                    <div class="flex flex-wrap border-b border-gray-200 dark:border-gray-700 mb-4">
+                        <button id="tab-grade1-2" class="tab-btn px-4 py-2 text-sm font-medium border-b-2 border-primary-500 text-primary-600 dark:text-primary-400 dark:border-primary-400">小学低年级</button>
+                        <button id="tab-grade3-4" class="tab-btn px-4 py-2 text-sm font-medium border-b-2 border-transparent hover:border-gray-300 dark:hover:border-gray-600">小学中年级</button>
+                        <button id="tab-grade5-6" class="tab-btn px-4 py-2 text-sm font-medium border-b-2 border-transparent hover:border-gray-300 dark:hover:border-gray-600">小学高年级</button>
+                        <button id="tab-grade7-9" class="tab-btn px-4 py-2 text-sm font-medium border-b-2 border-transparent hover:border-gray-300 dark:hover:border-gray-600">初中阶段</button>
+                    </div>
+                    
+                    <!-- 学段内容 -->
+                    <div id="content-grade1-2" class="tab-content block">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-child text-yellow-500 mr-2"></i>
+                                小学低年级（1-2年级）
+                            </h3>
+                            <ul class="list-disc pl-5 space-y-3">
+                                <li>初步养成自己的事情自己做的意识和习惯，学会整理个人物品和学习用品</li>
+                                <li>学会简单的个人卫生习惯，如洗手、刷牙、洗脸等</li>
+                                <li>能够参与简单的家务劳动，如整理餐桌、收拾玩具等</li>
+                                <li>学会正确使用简单的劳动工具，如扫帚、抹布等</li>
+                                <li>能够参与简单的校园劳动，如值日、保持教室整洁等</li>
+                                <li>初步了解劳动的重要性，体验劳动的快乐</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="content-grade3-4" class="tab-content hidden">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-seedling text-green-500 mr-2"></i>
+                                小学中年级（3-4年级）
+                            </h3>
+                            <ul class="list-disc pl-5 space-y-3">
+                                <li>能够独立完成个人生活自理，如穿衣、整理书包、收拾房间等</li>
+                                <li>学会更多家务劳动技能，如简单的烹饪、洗碗、擦桌子等</li>
+                                <li>能够使用更多种类的劳动工具，并注意安全</li>
+                                <li>参与校园环境维护，如清扫校园、美化教室等</li>
+                                <li>学习简单的种植和养殖知识，体验农业生产劳动</li>
+                                <li>初步了解不同职业的劳动特点，尊重各种职业的劳动者</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="content-grade5-6" class="tab-content hidden">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-leaf text-teal-500 mr-2"></i>
+                                小学高年级（5-6年级）
+                            </h3>
+                            <ul class="list-disc pl-5 space-y-3">
+                                <li>能够独立完成较复杂的家务劳动，如简单饭菜制作、衣物清洗等</li>
+                                <li>掌握常用家用电器的使用方法和安全知识</li>
+                                <li>能够参与校园公共区域的劳动和管理，如图书整理、花草养护等</li>
+                                <li>学习更多种植和养殖技能，了解农作物生长规律</li>
+                                <li>能够进行简单的手工制作和创意设计</li>
+                                <li>参与社区服务和公益活动，培养社会责任感</li>
+                                <li>了解传统工艺和现代科技在劳动中的应用</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="content-grade7-9" class="tab-content hidden">
+                        <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-graduation-cap text-blue-500 mr-2"></i>
+                                初中阶段（7-9年级）
+                            </h3>
+                            <ul class="list-disc pl-5 space-y-3">
+                                <li>能够独立规划和完成家庭综合性劳动任务</li>
+                                <li>掌握更复杂的生活技能，如家庭理财、家居维修等</li>
+                                <li>能够参与和组织校园劳动活动，发挥带头作用</li>
+                                <li>学习和体验不同行业的劳动过程，了解职业特点</li>
+                                <li>能够运用科学知识和技术手段解决劳动中的问题</li>
+                                <li>积极参与社会实践和志愿服务，增强社会责任感</li>
+                                <li>形成初步的职业意识和生涯规划能力</li>
+                                <li>理解劳动与个人发展、社会进步的关系</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实施建议部分 -->
+        <section id="implementation" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">实施建议</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-chalkboard-teacher text-blue-500 mr-2"></i>
+                            教学组织
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>采用灵活多样的教学方式，如项目式学习、体验式教学等</li>
+                            <li>注重理论与实践相结合，强调动手操作和实践体验</li>
+                            <li>合理安排课内外劳动时间，保证劳动教育的连续性</li>
+                            <li>充分利用校内外劳动实践基地，拓展劳动教育空间</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                            安全保障
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>制定完善的安全管理制度和应急预案</li>
+                            <li>加强劳动工具使用和安全知识教育</li>
+                            <li>配备必要的安全防护设施和用品</li>
+                            <li>建立健全安全责任制，明确各方职责</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-users-cog text-purple-500 mr-2"></i>
+                            资源整合
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>整合校内外劳动教育资源，建立资源共享机制</li>
+                            <li>加强与家庭、社区、企业的合作</li>
+                            <li>建设校内劳动实践基地和创新实验室</li>
+                            <li>开发特色劳动教育课程和教材</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-graduation-cap text-red-500 mr-2"></i>
+                            师资建设
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>加强劳动教育教师队伍建设</li>
+                            <li>开展教师劳动教育专业培训</li>
+                            <li>聘请校外劳动教育专家和技术人员</li>
+                            <li>建立教师劳动教育研修制度</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 评价方式部分 -->
+        <section id="evaluation" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">评价方式</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-clipboard-check text-blue-500 mr-2"></i>
+                            评价内容
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>劳动态度和习惯养成情况</li>
+                            <li>劳动知识和技能掌握程度</li>
+                            <li>劳动实践能力和创新表现</li>
+                            <li>劳动精神和价值观形成情况</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-chart-line text-green-500 mr-2"></i>
+                            评价方式
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>过程性评价与终结性评价相结合</li>
+                            <li>定性评价与定量评价相结合</li>
+                            <li>自我评价、互评与教师评价相结合</li>
+                            <li>实践操作考核与理论知识考查相结合</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-tools text-yellow-500 mr-2"></i>
+                            评价工具
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>劳动实践记录册和劳动手册</li>
+                            <li>劳动技能考核表和评分标准</li>
+                            <li>劳动成果展示和作品评价</li>
+                            <li>劳动档案袋和成长记录</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-award text-red-500 mr-2"></i>
+                            评价应用
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>将评价结果纳入学生综合素质评价</li>
+                            <li>建立激励机制，表彰劳动先进</li>
+                            <li>及时反馈，指导学生改进提高</li>
+                            <li>评价结果作为课程改进依据</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 课时安排部分 -->
+        <section id="schedule" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">课时安排</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <p class="mb-6">劳动课程在义务教育阶段的课时安排如下，各学校可根据实际情况进行适当调整。</p>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100 dark:bg-gray-700">
+                            <tr>
+                                <th class="py-3 px-4 text-left font-semibold">学段</th>
+                                <th class="py-3 px-4 text-left font-semibold">周课时</th>
+                                <th class="py-3 px-4 text-left font-semibold">学期课时</th>
+                                <th class="py-3 px-4 text-left font-semibold">集中实践活动</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <tr>
+                                <td class="py-4 px-4 font-medium">小学1-2年级</td>
+                                <td class="py-4 px-4">1课时</td>
+                                <td class="py-4 px-4">每学期16-18课时</td>
+                                <td class="py-4 px-4">每学年安排1-2次</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-medium">小学3-4年级</td>
+                                <td class="py-4 px-4">1课时</td>
+                                <td class="py-4 px-4">每学期16-18课时</td>
+                                <td class="py-4 px-4">每学年安排2-3次</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-medium">小学5-6年级</td>
+                                <td class="py-4 px-4">2课时</td>
+                                <td class="py-4 px-4">每学期32-36课时</td>
+                                <td class="py-4 px-4">每学年安排3-4次</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-medium">初中7-9年级</td>
+                                <td class="py-4 px-4">2课时</td>
+                                <td class="py-4 px-4">每学期32-36课时</td>
+                                <td class="py-4 px-4">每学年安排4-5次</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2 flex items-center">
+                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
+                        课时说明
+                    </h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>1课时为40分钟（小学）或45分钟（初中）</li>
+                        <li>集中实践活动可安排在周末或假期进行，每次活动2-4课时</li>
+                        <li>学校可根据实际情况，将部分课时与其他学科进行整合</li>
+                        <li>劳动周或劳动月活动可计入集中实践活动课时</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实施建议部分 -->
+        <section id="implementation" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">实施建议</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <p class="mb-6">劳动课程的实施应遵循以下原则和建议，确保课程效果。</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-chalkboard-teacher text-indigo-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">教学方法</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>采用体验式、项目式、合作式等多种教学方法</li>
+                            <li>注重理论与实践相结合，以实践为主</li>
+                            <li>根据学生年龄特点和认知水平设计教学活动</li>
+                            <li>创设真实的劳动情境，提高学生参与度</li>
+                            <li>利用信息技术手段，丰富教学资源和方式</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-users-cog text-blue-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">组织管理</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>健全劳动教育工作机制和管理制度</li>
+                            <li>明确各部门职责，形成协同育人合力</li>
+                            <li>合理安排劳动课程时间和场地</li>
+                            <li>加强劳动安全教育和管理</li>
+                            <li>建立家校社协同育人机制</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-hands-helping text-green-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">资源整合</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>充分利用校内劳动场所和设施</li>
+                            <li>开发和利用校外劳动教育资源</li>
+                            <li>与家庭、社区、企业建立合作关系</li>
+                            <li>整合各学科资源，实现跨学科融合</li>
+                            <li>建设劳动教育数字资源库</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg hover-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-shield-alt text-red-500 mr-3 text-xl"></i>
+                            <h3 class="text-xl font-semibold">安全保障</h3>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>制定劳动安全操作规程和应急预案</li>
+                            <li>加强劳动工具和设备的安全管理</li>
+                            <li>开展劳动安全教育和培训</li>
+                            <li>配备必要的安全防护用品</li>
+                            <li>建立劳动安全责任制和监督机制</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 评价方式部分 -->
+        <section id="evaluation" class="mb-16 scroll-mt-20">
+            <div class="border-l-4 border-primary-500 pl-4 mb-6 fade-in">
+                <h2 class="text-3xl font-bold">评价方式</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 fade-in delay-1">
+                <p class="mb-6">劳动课程评价应坚持过程性评价与结果性评价相结合，定性评价与定量评价相结合，注重评价的多元化和发展性。</p>
+                
+                <div class="space-y-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-clipboard-check text-primary-500 mr-2"></i>
+                            评价主体
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-user-graduate text-blue-500 mr
